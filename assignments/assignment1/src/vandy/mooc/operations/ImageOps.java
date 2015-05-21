@@ -100,7 +100,7 @@ public class ImageOps {
      */
     public ImageOps(MainActivity activity) {
         // Initialize the WeakReference.
-        mActivity = new WeakReference<>(activity);
+        mActivity = new WeakReference<MainActivity>(activity);
 
         // Initialize the downloadHandler.
         mServiceResultHandler =
@@ -352,8 +352,8 @@ public class ImageOps {
         for (String url: mUrlList) {
             TextView urlTextView = new TextView(mActivity.get());
             urlTextView.setLayoutParams
-                (new LayoutParams(LayoutParams.WRAP_CONTENT,
-                                  LayoutParams.WRAP_CONTENT));
+                (new LayoutParams(android.view.ViewGroup.LayoutParams.WRAP_CONTENT,
+                                  android.view.ViewGroup.LayoutParams.WRAP_CONTENT));
             urlTextView.setText(url);
             mLinearLayout.addView(urlTextView);
         }
@@ -419,7 +419,7 @@ public class ImageOps {
      */
     public void onConfigurationChange(MainActivity activity) {
         // Reset the mActivity WeakReference.
-        mActivity = new WeakReference<>(activity);
+        mActivity = new WeakReference<MainActivity>(activity);
 
         // If we have a currently active service result handler, allow
         // the handler to update its outdated weak reference to the

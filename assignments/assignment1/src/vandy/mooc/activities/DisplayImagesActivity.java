@@ -236,7 +236,12 @@ public class DisplayImagesActivity extends LifecycleLoggingActivity {
                                 // out-of-memory exceptions with large
                                 // images.
                                 (getScaledBitmap(bitmap));
-                        } catch (Exception | Error e) {
+                        } catch (Exception e) {
+                            Log.e(TAG,"Error displaying image:", e);
+                            Utils.showToast(DisplayImagesActivity.this,
+                                            "Error displaying image at "
+                                            + bitmap.getAbsolutePath());
+                        } catch (Error e) {
                             Log.e(TAG,"Error displaying image:", e);
                             Utils.showToast(DisplayImagesActivity.this,
                                             "Error displaying image at "

@@ -99,15 +99,15 @@ public class Utils {
                                  options);
         int ratio = 
             (int) (4 * (long) options.outHeight
-                   * (long) options.outWidth * (long) 4 
+                   * options.outWidth * 4 
                    / (info.availMem + 1));
 
         options.inSampleSize = ratio;
         options.inJustDecodeBounds = false;
 
-        try (InputStream inputStream =
-             new FileInputStream(pathToImageFile.toString())) {
-                return BitmapFactory.decodeFile(pathToImageFile.toString(),
+        try {
+        	new FileInputStream(pathToImageFile.toString());
+            return BitmapFactory.decodeFile(pathToImageFile.toString(),
                                                 options);
             } catch (Exception e) {
             e.printStackTrace();
@@ -170,8 +170,9 @@ public class Utils {
             new File(openDirectory(directoryPathname),
                      getUniqueFilename(pathToImageFile.getLastPathSegment()));
 
-        try (FileOutputStream fileOutputStream =
-             new FileOutputStream(filePath)) {
+        try {
+        	FileOutputStream fileOutputStream =
+                    new FileOutputStream(filePath);
             grayScaleImage.compress(CompressFormat.JPEG, 100,
                                     fileOutputStream);
 
@@ -225,9 +226,9 @@ public class Utils {
 
                     // Get a stream from the image resource and copy it into a
                     // temporary file.
-                    try (InputStream is = (InputStream)
-                         context.getResources().openRawResource(OFFLINE_TEST_IMAGE);
-                         OutputStream os = new FileOutputStream(filePath)) {
+                    try {
+                    	InputStream is = context.getResources().openRawResource(OFFLINE_TEST_IMAGE);
+                                OutputStream os = new FileOutputStream(filePath);
                          copyFile(is, os);
                     } catch (Exception e) {
                         return null; // Indicate a failure.
@@ -318,7 +319,8 @@ public class Utils {
                 filePath.delete();
                 
             // Pre-validate file.
-            try (InputStream is = (InputStream) url.getContent()) {
+            try {
+            	InputStream is = (InputStream) url.getContent();
                  BitmapFactory.Options options = 
                      new BitmapFactory.Options();
                  options.inJustDecodeBounds = true;
@@ -331,8 +333,9 @@ public class Utils {
             
             // Get the content of the resource at the url and save it
             // to an output file.
-            try (InputStream is = (InputStream) url.getContent();
-                 OutputStream os = new FileOutputStream(filePath)) {
+            try {
+            	InputStream is = (InputStream) url.getContent();
+                OutputStream os = new FileOutputStream(filePath);
                  copyFile(is, os);
             } catch (Exception e) {
             	return null; // Indicate a failure.
